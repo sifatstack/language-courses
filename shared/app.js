@@ -4,6 +4,90 @@
  */
 
 /* ========================================================================
+   Audio Player Module — manifest-based pronunciation playback
+   ======================================================================== */
+window.AudioPlayer = (() => {
+  let _manifest = null;
+  let _currentAudio = null;
+  let _basePath = '';
+  const SPEAKER_SVG = '<svg viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02z"/></svg>';
+
+  async function loadManifest(courseId) {
+    _basePath = 'audio/';
+    try {
+      const resp = await fetch(_basePath + 'manifest.json');
+      if (resp.ok) {
+        _manifest = await resp.json();
+      }
+    } catch (e) {
+      // No manifest — audio not yet generated
+    }
+  }
+
+  function isReady() { return _manifest !== null; }
+
+  function getFile(text) {
+    if (!_manifest) return null;
+    const clean = text.trim();
+    return _manifest[clean] || null;
+  }
+
+  function play(text, btn) {
+    if (_currentAudio) {
+      _currentAudio.pause();
+      _currentAudio.currentTime = 0;
+      document.querySelectorAll('.audio-btn.playing').forEach(b => b.classList.remove('playing'));
+    }
+
+    const file = getFile(text);
+    if (!file) return;
+
+    _currentAudio = new Audio(_basePath + file);
+    if (btn) btn.classList.add('playing');
+
+    _currentAudio.play().catch(() => {
+      if (btn) btn.classList.remove('playing');
+    });
+
+    _currentAudio.addEventListener('ended', () => {
+      if (btn) btn.classList.remove('playing');
+      _currentAudio = null;
+    });
+
+    _currentAudio.addEventListener('error', () => {
+      if (btn) btn.classList.remove('playing');
+      _currentAudio = null;
+    });
+  }
+
+  function stop() {
+    if (_currentAudio) {
+      _currentAudio.pause();
+      _currentAudio.currentTime = 0;
+      _currentAudio = null;
+    }
+    document.querySelectorAll('.audio-btn.playing').forEach(b => b.classList.remove('playing'));
+  }
+
+  function createButton(text) {
+    if (!getFile(text)) return null;
+    const btn = document.createElement('button');
+    btn.className = 'audio-btn';
+    btn.setAttribute('aria-label', 'Play pronunciation');
+    btn.innerHTML = SPEAKER_SVG;
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      e.preventDefault();
+      play(text, btn);
+    });
+    return btn;
+  }
+
+  return { loadManifest, isReady, play, stop, createButton, SPEAKER_SVG };
+})();
+
+
+/* ========================================================================
    Progress Module — localStorage read/write
    ======================================================================== */
 window.Progress = (() => {
@@ -487,9 +571,24 @@ window.UI = (() => {
 
       if (emptyState) emptyState.classList.add('hidden');
       cardEl.parentElement.classList.remove('hidden');
+
+      // Audio button on flashcard front
+      const frontEl = cardEl.querySelector('.flashcard-front');
+      if (frontEl) {
+        const oldBtn = frontEl.querySelector('.audio-btn');
+        if (oldBtn) oldBtn.remove();
+        if (AudioPlayer.isReady()) {
+          const audioBtn = AudioPlayer.createButton(card.native);
+          if (audioBtn) {
+            const tapHint = frontEl.querySelector('.flashcard-tap');
+            frontEl.insertBefore(audioBtn, tapHint);
+          }
+        }
+      }
     }
 
     function rate(quality) {
+      AudioPlayer.stop();
       const card = cards[currentIdx];
       if (!card) return;
       FlashcardEngine.recordReview(_courseId, card.id, quality);
@@ -541,6 +640,20 @@ window.UI = (() => {
     showCard();
   }
 
+  function _initAudioButtons() {
+    if (!AudioPlayer.isReady()) return;
+    document.querySelectorAll('.ar-inline, .bn-inline').forEach(span => {
+      // Skip if already has an audio button sibling
+      if (span.nextElementSibling && span.nextElementSibling.classList.contains('audio-btn')) return;
+      const text = span.textContent.trim();
+      if (!text) return;
+      const btn = AudioPlayer.createButton(text);
+      if (btn) {
+        span.insertAdjacentElement('afterend', btn);
+      }
+    });
+  }
+
   return {
     init(courseId) {
       _courseId = courseId;
@@ -552,6 +665,10 @@ window.UI = (() => {
       _initQuizzes();
       _initTextExercises();
       _initFlashcardPage();
+      // Load audio manifest async, then inject speaker buttons
+      AudioPlayer.loadManifest(courseId).then(() => {
+        _initAudioButtons();
+      });
     }
   };
 })();

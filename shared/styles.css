@@ -914,6 +914,90 @@ p { margin-bottom: var(--sp-sm); }
 .empty-state-icon { font-size: 48px; margin-bottom: var(--sp-md); }
 .empty-state-title { font-size: var(--fs-lg); font-weight: 600; margin-bottom: var(--sp-sm); color: var(--color-text); }
 
+/* ---------- Audio Button ---------- */
+.audio-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  min-width: 32px;
+  border: none;
+  border-radius: 50%;
+  background: var(--color-primary-light);
+  color: var(--color-primary);
+  cursor: pointer;
+  transition: background var(--tr-fast), transform var(--tr-fast);
+  vertical-align: middle;
+  margin-left: 6px;
+  padding: 0;
+  flex-shrink: 0;
+  position: relative;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* 44px iOS tap target */
+.audio-btn::before {
+  content: '';
+  position: absolute;
+  top: -6px;
+  left: -6px;
+  right: -6px;
+  bottom: -6px;
+}
+
+.audio-btn:hover {
+  background: var(--color-primary);
+  color: white;
+}
+
+.audio-btn:active {
+  transform: scale(0.9);
+}
+
+.audio-btn.playing {
+  background: var(--color-primary);
+  color: white;
+}
+
+.audio-btn svg {
+  width: 16px;
+  height: 16px;
+  fill: currentColor;
+  pointer-events: none;
+}
+
+/* Inline text with audio: keep text and button on same line */
+.ar-inline, .bn-inline {
+  white-space: normal;
+}
+
+/* In tables, make audio buttons smaller */
+.lesson-table .audio-btn {
+  width: 26px;
+  height: 26px;
+  min-width: 26px;
+  margin-left: 4px;
+}
+
+.lesson-table .audio-btn svg {
+  width: 13px;
+  height: 13px;
+}
+
+/* On flashcard, center the audio button */
+.flashcard-front .audio-btn {
+  margin: var(--sp-sm) 0 0;
+  width: 40px;
+  height: 40px;
+  min-width: 40px;
+}
+
+.flashcard-front .audio-btn svg {
+  width: 20px;
+  height: 20px;
+}
+
 /* ---------- Utility ---------- */
 .hidden { display: none !important; }
 .text-center { text-align: center; }
