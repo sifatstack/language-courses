@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Flashcards - Syrian Levantine Arabic</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Noto+Naskh+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../shared/styles.css">
+<link rel="stylesheet" href="theme.css">
+</head>
+<body>
+
+<!-- Top nav (tablet+) -->
+<nav class="top-nav">
+  <a href="index.html">Home</a>
+  <a href="flashcards.html" class="active">Flashcards</a>
+  <a href="phase1.html">Phase 1</a>
+  <a href="phase2.html">Phase 2</a>
+  <a href="phase3.html">Phase 3</a>
+  <a href="phase4.html">Phase 4</a>
+</nav>
+
+<div class="page-container">
+  <div class="content-area">
+
+    <div class="top-bar">
+      <a href="index.html" class="back-btn">&larr; Back</a>
+      <span class="page-title">Flashcard Review</span>
+    </div>
+
+    <div class="flashcard-page">
+
+      <!-- Filter buttons -->
+      <div class="flashcard-filter">
+        <button class="filter-btn active" data-phase="all">All</button>
+        <button class="filter-btn" data-phase="0">Phase 1</button>
+        <button class="filter-btn" data-phase="1">Phase 2</button>
+        <button class="filter-btn" data-phase="2">Phase 3</button>
+        <button class="filter-btn" data-phase="3">Phase 4</button>
+      </div>
+
+      <!-- Card count -->
+      <div class="flashcard-info">
+        <div class="flashcard-count">0 cards due</div>
+      </div>
+
+      <!-- Flashcard -->
+      <div class="flashcard-container">
+        <div class="flashcard">
+          <div class="flashcard-front">
+            <div class="flashcard-native front-text"></div>
+            <div class="flashcard-tap">Tap to reveal</div>
+          </div>
+          <div class="flashcard-back">
+            <div class="flashcard-pron"></div>
+            <div class="flashcard-meaning"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Rating buttons -->
+      <div class="rating-buttons hidden">
+        <button class="rating-btn again" data-quality="1">
+          Again
+          <span class="rating-label">&lt;1min</span>
+        </button>
+        <button class="rating-btn hard" data-quality="3">
+          Hard
+          <span class="rating-label">~6min</span>
+        </button>
+        <button class="rating-btn good" data-quality="4">
+          Good
+          <span class="rating-label">~10min</span>
+        </button>
+        <button class="rating-btn easy" data-quality="5">
+          Easy
+          <span class="rating-label">4d</span>
+        </button>
+      </div>
+
+      <!-- Progress -->
+      <div class="flashcard-progress">
+        <div class="progress-bar">
+          <div class="progress-fill flashcard-progress-fill" style="width:0%"></div>
+        </div>
+        <p class="progress-label flashcard-progress-text">0 / 0</p>
+      </div>
+
+      <!-- Empty state -->
+      <div class="empty-state hidden">
+        <div class="empty-state-icon">&#x2705;</div>
+        <div class="empty-state-title">No cards due</div>
+        <p>All caught up! Come back later or start a new lesson to add cards.</p>
+        <a href="index.html" class="due-btn mt-lg" style="display:inline-flex;width:auto;">Back to Dashboard</a>
+      </div>
+
+    </div><!-- /flashcard-page -->
+
+  </div><!-- /content-area -->
+</div><!-- /page-container -->
+
+<!-- Bottom nav (mobile) -->
+<nav class="bottom-nav">
+  <a href="index.html" class="nav-item">
+    <span class="nav-icon">&#x1F3E0;</span>
+    Home
+  </a>
+  <a href="flashcards.html" class="nav-item active">
+    <span class="nav-icon">&#x1F4C7;</span>
+    Flashcards
+    <span class="nav-badge" style="display:none;">0</span>
+  </a>
+  <a href="phase1.html" class="nav-item">
+    <span class="nav-icon">&#x1F4CA;</span>
+    Progress
+  </a>
+</nav>
+
+<script src="../shared/sm2.js"></script>
+<script src="data.js"></script>
+<script src="../shared/app.js"></script>
+<script>
+  UI.init('arabic');
+</script>
+</body>
+</html>

@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Language Courses</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Noto+Naskh+Arabic:wght@400;500;600;700&family=Noto+Sans+Bengali:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --font-body: 'Inter', 'Helvetica Neue', sans-serif;
+    --dark: #1b1b1b;
+    --gray: #666;
+    --bg: #f5f5f5;
+    --surface: #fff;
+    --shadow: 0 4px 16px rgba(0,0,0,0.08);
+    --radius: 16px;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: var(--font-body);
+    background: var(--bg);
+    color: var(--dark);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 24px 16px;
+  }
+  h1 {
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 8px;
+    text-align: center;
+  }
+  .subtitle {
+    color: var(--gray);
+    font-size: 15px;
+    margin-bottom: 40px;
+    text-align: center;
+  }
+  .cards {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+    max-width: 480px;
+  }
+  .course-card {
+    background: var(--surface);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 28px 24px;
+    text-decoration: none;
+    color: var(--dark);
+    transition: transform 150ms ease, box-shadow 150ms ease;
+    border-left: 6px solid;
+  }
+  .course-card:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.12); }
+  .course-card:active { transform: scale(0.98); }
+  .course-card.arabic { border-left-color: #2d6a4f; }
+  .course-card.bangla { border-left-color: #1565c0; }
+  .card-lang {
+    font-size: 32px;
+    margin-bottom: 8px;
+    line-height: 1.4;
+  }
+  .card-lang .native {
+    font-weight: 600;
+  }
+  .card-lang .native.ar {
+    font-family: 'Noto Naskh Arabic', serif;
+    direction: rtl;
+    unicode-bidi: isolate;
+  }
+  .card-lang .native.bn {
+    font-family: 'Noto Sans Bengali', sans-serif;
+  }
+  .card-title {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+  .card-desc {
+    font-size: 14px;
+    color: var(--gray);
+    line-height: 1.5;
+  }
+  .card-arrow {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin-top: 12px;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--gray);
+  }
+  .card-arrow svg { margin-left: 6px; }
+  .arabic .card-arrow { color: #2d6a4f; }
+  .bangla .card-arrow { color: #1565c0; }
+  footer {
+    margin-top: 48px;
+    font-size: 13px;
+    color: #999;
+    text-align: center;
+  }
+  @media (min-width: 640px) {
+    .cards { flex-direction: row; max-width: 720px; }
+    .course-card { flex: 1; }
+  }
+</style>
+</head>
+<body>
+  <h1>Language Courses</h1>
+  <p class="subtitle">Interactive lessons with flashcards, quizzes, and spaced repetition</p>
+  <div class="cards">
+    <a href="arabic/index.html" class="course-card arabic">
+      <div class="card-lang"><span class="native ar">عَرَبِي</span></div>
+      <div class="card-title">Syrian Levantine Arabic</div>
+      <div class="card-desc">Damascus dialect base. For speakers of English and Spanish. 14 weeks, 4 phases.</div>
+      <div class="card-arrow">Start learning <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M6 3l5 5-5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+    </a>
+    <a href="bangla/index.html" class="course-card bangla">
+      <div class="card-lang"><span class="native bn">বাংলা</span></div>
+      <div class="card-title">Bangladeshi Bangla</div>
+      <div class="card-desc">For Syrian Arabic speakers. Dhaka standard colloquial. 14 weeks, 4 phases.</div>
+      <div class="card-arrow">Start learning <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M6 3l5 5-5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+    </a>
+  </div>
+  <footer>Built for self-study. Progress saved in your browser.</footer>
+</body>
+</html>

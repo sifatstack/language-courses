@@ -1,0 +1,26 @@
+/* Arabic Course Theme — Green, RTL support */
+:root {
+  --color-primary: #2d6a4f;
+  --color-primary-light: #d8f3dc;
+  --color-practice-bg: #e8f5e9;
+  --color-practice-border: #2d6a4f;
+}
+
+.ar-inline {
+  font-family: 'Noto Naskh Arabic', serif;
+  font-size: 1.2em;
+  font-weight: 500;
+  direction: rtl;
+  unicode-bidi: isolate;
+  line-height: 2.2;
+}
+
+/* Larger Arabic text in flashcards and exercises */
+.flashcard-native {
+  font-family: 'Noto Naskh Arabic', serif;
+  direction: rtl;
+}
+
+.text-input[dir="auto"] {
+  font-family: 'Noto Naskh Arabic', 'Inter', sans-serif;
+}

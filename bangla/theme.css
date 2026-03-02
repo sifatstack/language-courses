@@ -1,0 +1,42 @@
+/* Bangla Course Theme — Blue, LTR + Arabic comparison boxes */
+:root {
+  --color-primary: #1565c0;
+  --color-primary-light: #e3f2fd;
+  --color-practice-bg: #e3f2fd;
+  --color-practice-border: #1565c0;
+}
+
+.bn-inline {
+  font-family: 'Noto Sans Bengali', sans-serif;
+  font-size: 1.15em;
+  font-weight: 500;
+  line-height: 1.9;
+}
+
+.ar-inline {
+  font-family: 'Noto Naskh Arabic', serif;
+  font-size: 1.15em;
+  font-weight: 500;
+  direction: rtl;
+  unicode-bidi: isolate;
+  line-height: 2;
+}
+
+/* Arabic connection boxes — pink */
+.arabic-box {
+  background: #fce4ec;
+  border-left: 4px solid #e91e63;
+  padding: var(--sp-md);
+  margin: var(--sp-md) 0;
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+}
+.arabic-box strong { color: #c62828; }
+
+/* Flashcard native text */
+.flashcard-native {
+  font-family: 'Noto Sans Bengali', sans-serif;
+}
+
+.text-input[dir="auto"] {
+  font-family: 'Noto Sans Bengali', 'Inter', sans-serif;
+}

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Syrian Levantine Arabic</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Noto+Naskh+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../shared/styles.css">
+<link rel="stylesheet" href="theme.css">
+</head>
+<body>
+
+<!-- Top nav (tablet+) -->
+<nav class="top-nav">
+  <a href="index.html" class="active">Home</a>
+  <a href="flashcards.html">Flashcards</a>
+  <a href="phase1.html">Phase 1</a>
+  <a href="phase2.html">Phase 2</a>
+  <a href="phase3.html">Phase 3</a>
+  <a href="phase4.html">Phase 4</a>
+</nav>
+
+<div class="page-container">
+  <div class="content-area">
+
+    <h1>Syrian Levantine Arabic</h1>
+    <p class="mb-lg" style="color:var(--color-text-secondary);">Damascus dialect. 14 weeks, 4 phases. Interactive lessons with flashcards and spaced repetition.</p>
+
+    <!-- Overall Progress -->
+    <div class="dashboard-stats">
+      <h3 style="margin-top:0;">Overall Progress</h3>
+      <div class="progress-bar lg">
+        <div class="progress-fill overall-progress-fill" style="width:0%"></div>
+      </div>
+      <p class="progress-label overall-progress-label">0 of 0 sections complete</p>
+
+      <a href="flashcards.html" class="due-btn">
+        Review Due Cards <span class="badge">0</span>
+      </a>
+    </div>
+
+    <!-- Phase Cards -->
+    <div class="phase-cards">
+
+      <a href="phase1.html" class="phase-card" data-phase="0">
+        <div class="phase-card-title">Phase 1: Survival Arabic</div>
+        <div class="phase-card-sub">Weeks 1-3 -- Greetings, Needs, Getting Around</div>
+        <div class="progress-bar">
+          <div class="progress-fill" style="width:0%"></div>
+        </div>
+        <div class="phase-card-footer">
+          <span class="phase-card-percent">0%</span>
+          <span class="phase-card-action">Start &rarr;</span>
+        </div>
+      </a>
+
+      <a href="phase2.html" class="phase-card" data-phase="1">
+        <div class="phase-card-title">Phase 2: Building Blocks</div>
+        <div class="phase-card-sub">Weeks 4-8 -- Verbs, Tenses, Questions, Descriptions</div>
+        <div class="progress-bar">
+          <div class="progress-fill" style="width:0%"></div>
+        </div>
+        <div class="phase-card-footer">
+          <span class="phase-card-percent">0%</span>
+          <span class="phase-card-action">Start &rarr;</span>
+        </div>
+      </a>
+
+      <a href="phase3.html" class="phase-card" data-phase="2">
+        <div class="phase-card-title">Phase 3: Real Conversation</div>
+        <div class="phase-card-sub">Weeks 9-14 -- Food, Family, Feelings, Daily Life</div>
+        <div class="progress-bar">
+          <div class="progress-fill" style="width:0%"></div>
+        </div>
+        <div class="phase-card-footer">
+          <span class="phase-card-percent">0%</span>
+          <span class="phase-card-action">Start &rarr;</span>
+        </div>
+      </a>
+
+      <a href="phase4.html" class="phase-card" data-phase="3">
+        <div class="phase-card-title">Phase 4: Fluency &amp; Culture</div>
+        <div class="phase-card-sub">Proverbs, Grammar Reference, Spanish Connection</div>
+        <div class="progress-bar">
+          <div class="progress-fill" style="width:0%"></div>
+        </div>
+        <div class="phase-card-footer">
+          <span class="phase-card-percent">0%</span>
+          <span class="phase-card-action">Start &rarr;</span>
+        </div>
+      </a>
+
+    </div><!-- /phase-cards -->
+
+  </div><!-- /content-area -->
+</div><!-- /page-container -->
+
+<!-- Bottom nav (mobile) -->
+<nav class="bottom-nav">
+  <a href="index.html" class="nav-item active">
+    <span class="nav-icon">&#x1F3E0;</span>
+    Home
+  </a>
+  <a href="flashcards.html" class="nav-item">
+    <span class="nav-icon">&#x1F4C7;</span>
+    Flashcards
+    <span class="nav-badge" style="display:none;">0</span>
+  </a>
+  <a href="phase1.html" class="nav-item">
+    <span class="nav-icon">&#x1F4CA;</span>
+    Progress
+  </a>
+</nav>
+
+<script src="../shared/sm2.js"></script>
+<script src="data.js"></script>
+<script src="../shared/app.js"></script>
+<script>
+  Dashboard.init('arabic');
+  UI.init('arabic');
+</script>
+</body>
+</html>
