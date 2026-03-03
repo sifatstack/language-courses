@@ -423,6 +423,34 @@ p { margin-bottom: var(--sp-sm); }
   flex-shrink: 0;
 }
 
+.section-complete-btn {
+  display: block;
+  width: 100%;
+  padding: 14px;
+  margin-top: var(--sp-lg);
+  border: 2px dashed var(--color-border);
+  border-radius: var(--radius-md);
+  background: transparent;
+  color: var(--color-text-secondary);
+  font-family: var(--font-body);
+  font-size: var(--fs-base);
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 200ms ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.section-complete-btn:active {
+  transform: scale(0.98);
+}
+
+.section-complete-btn.completed {
+  border-style: solid;
+  border-color: var(--color-primary);
+  background: var(--color-primary-light);
+  color: var(--color-primary);
+}
+
 /* ---------- Content Blocks (from lesson material) ---------- */
 .lesson-table {
   width: 100%;

@@ -345,12 +345,37 @@ window.UI = (() => {
     document.querySelectorAll('.section-check').forEach(cb => {
       const sectionId = cb.dataset.section;
       if (!sectionId || !_courseId) return;
-      cb.checked = Progress.isSectionComplete(_courseId, sectionId);
+      const isComplete = Progress.isSectionComplete(_courseId, sectionId);
+      cb.checked = isComplete;
       cb.addEventListener('change', () => {
         Progress.toggleSection(_courseId, sectionId);
         _updateWeekChecks();
         _updatePhaseProgress();
+        _syncCompleteButtons();
       });
+
+      // Add "Mark Complete" button at the bottom of the section
+      const section = cb.closest('.section');
+      if (section) {
+        const btn = document.createElement('button');
+        btn.className = 'section-complete-btn' + (isComplete ? ' completed' : '');
+        btn.dataset.section = sectionId;
+        btn.innerHTML = isComplete ? '&#x2705; Completed' : 'Mark Section Complete';
+        btn.addEventListener('click', () => {
+          cb.checked = !cb.checked;
+          cb.dispatchEvent(new Event('change'));
+        });
+        section.appendChild(btn);
+      }
+    });
+  }
+
+  function _syncCompleteButtons() {
+    document.querySelectorAll('.section-complete-btn').forEach(btn => {
+      const sectionId = btn.dataset.section;
+      const done = Progress.isSectionComplete(_courseId, sectionId);
+      btn.className = 'section-complete-btn' + (done ? ' completed' : '');
+      btn.innerHTML = done ? '&#x2705; Completed' : 'Mark Section Complete';
     });
   }
 
