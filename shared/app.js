@@ -681,6 +681,7 @@ window.Dashboard = (() => {
   return {
     init(courseId) {
       if (!window.COURSE_DATA) return;
+      window._dashboardCourseId = courseId;
       const prog = Progress.getOverallProgress(courseId);
 
       // Overall progress bar
@@ -721,3 +722,10 @@ window.Dashboard = (() => {
     }
   };
 })();
+
+// Re-run Dashboard when page is restored from bfcache (back/forward navigation)
+window.addEventListener('pageshow', function(e) {
+  if (e.persisted && window._dashboardCourseId) {
+    Dashboard.init(window._dashboardCourseId);
+  }
+});

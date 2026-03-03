@@ -104,6 +104,26 @@
   .card-arrow svg { margin-left: 6px; }
   .arabic .card-arrow { color: #2d6a4f; }
   .bangla .card-arrow { color: #1565c0; }
+  .card-progress { margin-top: 12px; }
+  .card-progress-bar {
+    width: 100%;
+    height: 6px;
+    background: #e8e8e8;
+    border-radius: 3px;
+    overflow: hidden;
+  }
+  .card-progress-fill {
+    height: 100%;
+    border-radius: 3px;
+    transition: width 300ms ease;
+  }
+  .arabic .card-progress-fill { background: #2d6a4f; }
+  .bangla .card-progress-fill { background: #1565c0; }
+  .card-progress-label {
+    font-size: 12px;
+    color: var(--gray);
+    margin-top: 4px;
+  }
   footer {
     margin-top: 48px;
     font-size: 13px;
@@ -124,15 +144,48 @@
       <div class="card-lang"><span class="native ar">عَرَبِي</span></div>
       <div class="card-title">Syrian Levantine Arabic</div>
       <div class="card-desc">Damascus dialect base. For speakers of English and Spanish. 14 weeks, 4 phases.</div>
+      <div class="card-progress" id="arabic-progress" style="display:none;">
+        <div class="card-progress-bar"><div class="card-progress-fill" id="arabic-fill"></div></div>
+        <div class="card-progress-label" id="arabic-label"></div>
+      </div>
       <div class="card-arrow">Start learning <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M6 3l5 5-5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
     </a>
     <a href="bangla/index.html" class="course-card bangla">
       <div class="card-lang"><span class="native bn">বাংলা</span></div>
       <div class="card-title">Bangladeshi Bangla</div>
       <div class="card-desc">For Syrian Arabic speakers. Dhaka standard colloquial. 14 weeks, 4 phases.</div>
+      <div class="card-progress" id="bangla-progress" style="display:none;">
+        <div class="card-progress-bar"><div class="card-progress-fill" id="bangla-fill"></div></div>
+        <div class="card-progress-label" id="bangla-label"></div>
+      </div>
       <div class="card-arrow">Start learning <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M6 3l5 5-5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
     </a>
   </div>
   <footer>Built for self-study. Progress saved in your browser.</footer>
+<script>
+  function showProgress(courseKey, totalSections, fillId, labelId, wrapperId) {
+    try {
+      var raw = localStorage.getItem(courseKey + '_progress');
+      if (!raw) return;
+      var data = JSON.parse(raw);
+      var completed = 0;
+      var sections = data.sections || {};
+      for (var id in sections) {
+        if (sections[id] && sections[id].completed) completed++;
+      }
+      if (completed === 0) return;
+      var pct = Math.round((completed / totalSections) * 100);
+      document.getElementById(fillId).style.width = pct + '%';
+      document.getElementById(labelId).textContent = completed + ' of ' + totalSections + ' sections (' + pct + '%)';
+      document.getElementById(wrapperId).style.display = 'block';
+    } catch (e) {}
+  }
+  function updateAll() {
+    showProgress('arabic', 56, 'arabic-fill', 'arabic-label', 'arabic-progress');
+    showProgress('bangla', 50, 'bangla-fill', 'bangla-label', 'bangla-progress');
+  }
+  updateAll();
+  window.addEventListener('pageshow', function(e) { if (e.persisted) updateAll(); });
+</script>
 </body>
 </html>
